@@ -1,5 +1,7 @@
 package ru.skypro.HW10;
 
+import java.util.Objects;
+
 public class Book {
     private final String BookName;
     private final Author Author;
@@ -19,7 +21,18 @@ public class Book {
     public void setYearBook(int yearBook) {
         this.yearBook = yearBook;
     }
-    public String getAuthor() {
-        return Author.getAuthorName();
+    public String toString() {
+        return "Книга " + this.BookName + " год издания " + this.yearBook + " автор " + Author.getAuthorName();
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return yearBook == book.yearBook && Objects.equals(BookName, book.BookName) && Objects.equals(Author, book.Author);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(BookName, Author, yearBook);
     }
 }
